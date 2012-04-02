@@ -1,0 +1,22 @@
+This Project consists of a Single Agent representing a Vaccum Cleaner Robot in a grid environment.
+
+* Vaccum Cleaner Robot:
+	- Name : MO (in alusion to the Microbe Obliterator of the Movie Wall-E).
+	- PAGE:
+		- Perceptions: 
+			- Environment is a Bidimensional Grid with configurable size. So its 'location' is determined by the coordinates x,y
+			- Each cell of the grid can be 'Dity' or 'Clean'.
+		- Actions: The robot is able to perform the following actions:
+			- Move (right, left, up or Down): which advances him one position on each direction (when not on the edges).
+			- Clean : Which changes the state of the floor to 'Clean'.
+	- Goals:
+		- Clean if dirty.
+		- Move to find more dirt.
+	- Environment:
+		- Observable
+		- Deterministic
+		- Episodic
+		- Static
+		- Discrete
+		- Single Agent
+			 

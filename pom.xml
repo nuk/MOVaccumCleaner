@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.unb.sma</groupId>
+	<artifactId>MOVaccumCleaner</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>MOVaccumCleaner</name>
+	<url>http://maven.apache.org</url>
+	<description>
+	  	This is an agent based Vaccum Cleaner environment.
+	  	Built using JADE framework and making use of the (tm) characters of movie Wall-E.
+	</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.tilab</groupId>
+			<artifactId>jade</artifactId>
+			<version>4.1.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/jade.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+</project>
