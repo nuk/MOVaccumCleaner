@@ -25,13 +25,9 @@ public class Environment {
 		}
 	}
 
-	public void set(int col, int row, State state) {
-		this.state[row][col] = state;
-	}
+	public void set(int col, int row, State state) {	this.state[row][col] = state;	}
 
-	public State getState(int col, int row) {
-		return state[row][col];
-	}
+	public State get(int col, int row) {	return state[row][col];	}
 
 	public void addAgent(MO mo, int col, int row) {
 		mo.setEnvironment(this);
@@ -43,12 +39,12 @@ public class Environment {
 		else p.setLocation(col, row);
 	}
 
-	public void setPosition(MO mo, int x, int y) {
-		position.get(mo).setLocation(x, y);
-	}
+	public void setPosition(MO mo, int x, int y) {	position.get(mo).setLocation(x, y);	}
 
 	public Point getPosition(MO mo) {
 		return position.get(mo); //FIXME: This should be unmodifiable
 	}
 
+	public int getRows(){	return state.length;	}
+	public int getCols(){	return state[0].length;	}
 }
