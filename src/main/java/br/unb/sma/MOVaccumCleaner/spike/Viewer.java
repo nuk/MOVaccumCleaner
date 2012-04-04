@@ -5,6 +5,7 @@ import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 
 public class Viewer extends Agent {
+	private static final long serialVersionUID = 4608004591243343623L;
 	
 	private Environment env;
 	
