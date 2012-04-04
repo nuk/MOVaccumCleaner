@@ -1,9 +1,11 @@
 package br.unb.sma.MOVaccumCleaner;
 
+import jade.core.Agent;
+import jade.core.behaviours.TickerBehaviour;
+
 import java.awt.Point;
 
 import br.unb.sma.MOVaccumCleaner.Environment.State;
-import jade.core.Agent;
 
 public class MO extends Agent{
 	
@@ -21,8 +23,16 @@ public class MO extends Agent{
 	
 	public void setEnvironment(Environment env) {	this.env = env;	}
 
+	@Override //TODO: Check how to test this
+	protected void setup() {
+		Environment.getInstance().addAgent(this, 0, 0);
+		addBehaviour(new TickerBehaviour(this, 500) {
+			@Override protected void onTick() {	doIt();	}
+		});
+	}
+	
 	public void doIt() {
-		Point here = env.getPosition(this);
+		Point here = env.agentPosition();
 		Point to = this.direction;
 		if (env.get(here.x, here.y) == State.Clean){
 			
@@ -52,7 +62,7 @@ public class MO extends Agent{
 	private void move(Point position, Point direction) {
 		position.x += direction.x; 
 		position.y += direction.y; 
-		env.setPosition(this, position.x, position.y);
+		env.agentPosition( position.x, position.y);
 	}
 
 }

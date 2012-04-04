@@ -18,7 +18,6 @@ public class _MOTest {
 							+"> but was: <"+env.get(x, y)+">";
 				assertEquals(msg,state[y][x],env.get(x, y));
 			}
-			System.out.print("\n");
 		}
 	}
 	
@@ -35,21 +34,21 @@ public class _MOTest {
 				{D,D}
 		},env);
 		
-		env.setPosition(mo,1,1);
+		env.agentPosition(1,1);
 		mo.doIt();
 		assertEnvironment(new Environment.State[][]{
 				{C,C},
 				{D,C}
 		},env);
-		assertEquals(new Point(1,1),env.getPosition(mo));
+		assertEquals(new Point(1,1),env.agentPosition());
 		
-		env.setPosition(mo,0,1);
+		env.agentPosition(0,1);
 		mo.doIt();
 		assertEnvironment(new Environment.State[][]{
 				{C,C},
 				{C,C}
 		},env);
-		assertEquals(new Point(0,1),env.getPosition(mo));
+		assertEquals(new Point(0,1),env.agentPosition());
 	}
 	
 	@Test public void moveRightIfClean(){
@@ -57,9 +56,9 @@ public class _MOTest {
 		MO mo = new MO();
 		env.addAgent(mo,0,0);
 		
-		assertEquals(new Point(0,0),env.getPosition(mo));
+		assertEquals(new Point(0,0),env.agentPosition());
 		mo.doIt();
-		assertEquals(new Point(1,0),env.getPosition(mo));
+		assertEquals(new Point(1,0),env.agentPosition());
 	}
 	
 	@Test public void ifCleanMoveScanningForDirt(){
@@ -67,15 +66,15 @@ public class _MOTest {
 		MO mo = new MO();
 		env.addAgent(mo,0,0);
 		
-		assertEquals(new Point(0,0),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(1,0),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(2,0),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(2,1),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(1,1),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(0,1),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(0,2),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(1,2),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(2,2),env.getPosition(mo));
+		assertEquals(new Point(0,0),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(1,0),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(2,0),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(2,1),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(1,1),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(0,1),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(0,2),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(1,2),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(2,2),env.agentPosition());
 	}
 	
 	@Test public void stopsInTheLastCell(){
@@ -83,7 +82,7 @@ public class _MOTest {
 		MO mo = new MO();
 		env.addAgent(mo,2,2);
 		
-		assertEquals(new Point(2,2),env.getPosition(mo));
-		mo.doIt();	assertEquals(new Point(2,2),env.getPosition(mo));
+		assertEquals(new Point(2,2),env.agentPosition());
+		mo.doIt();	assertEquals(new Point(2,2),env.agentPosition());
 	}
 }
