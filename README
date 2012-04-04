@@ -3,7 +3,7 @@ This Project consists of a Single Agent representing a Vaccum Cleaner Robot
 	to what is happening.
 
 To run use the params: 
-	"-gui -agents mo:br.unb.sma.MOVaccumCleaner.MO;viewer:br.unb.sma.MOVaccumCleaner.spike.Viewer -local-host 127.0.0.1"
+	"-gui -agents mo:br.unb.sma.MOVaccumCleaner.MO;walle:br.unb.sma.MOVaccumCleaner.WallE;viewer:br.unb.sma.MOVaccumCleaner.spike.Viewer -local-host 127.0.0.1"
 
 * Vaccum Cleaner Robot:
 	- Name: MO (in allusion to the Microbe Obliterator of the Movie Wall-E).

@@ -56,10 +56,17 @@ public class _EnvironmentTest {
 		
 		MO mo = new MO();
 		env.addAgent(mo, 1, 1);
-		assertEquals(". * . \n. a . \n* . * \n",env.toString());
+		assertEquals(". * . \n. o . \n* . * \n",env.toString());
 		
 		env.agentPosition(mo,1, 0);
-		assertEquals(". â . \n. . . \n* . * \n",env.toString());
+		assertEquals(". ô . \n. . . \n* . * \n",env.toString());
+		
+		WallE walle = new WallE();
+		env.addAgent(walle, 2, 1);
+		assertEquals(". ô . \n. . w \n* . * \n",env.toString());
+		
+		env.agentPosition(walle,0, 2);
+		assertEquals(". ô . \n. . . \nŵ . * \n",env.toString());
 	}
 	
 }

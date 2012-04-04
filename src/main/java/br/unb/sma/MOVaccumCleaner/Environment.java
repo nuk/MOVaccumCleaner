@@ -62,19 +62,28 @@ public class Environment {
 	public int getRows(){	return state.length;	}
 	public int getCols(){	return state[0].length;	}
 	
-	private boolean hasAgent(int x, int y){
-		return position.containsValue(new Point(x, y));
+	private EnvironmentAgent getAgent(int x, int y){
+		Point p = new Point(x, y);
+		if (position.containsValue(p)){
+			for (EnvironmentAgent a: position.keySet())
+				if (position.get(a).equals(p)) return a;
+		}
+		return null;
 	}
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
 		for (int y = 0 ; y < getRows() ; y ++){
 			for (int x = 0; x < getCols(); x++){
-				if(hasAgent(x,y)){
-					if (get(x,y) == State.Dirty)
-						b.append('â');
-					else
-						b.append('a');
+				EnvironmentAgent a = getAgent(x, y);
+				if(a != null){
+					if (a instanceof MO){
+						if (get(x,y) == State.Dirty)	b.append('ô');
+						else	b.append('o');
+					}else{
+						if (get(x,y) == State.Dirty)	b.append('ŵ');
+						else	b.append('w');
+					}
 				}
 				else{
 					b.append(get(x,y) == State.Dirty?'*':'.');
