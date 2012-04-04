@@ -8,6 +8,20 @@ import org.junit.Test;
 
 public class _MOTest {
 
+	private Environment.State C = Environment.State.Clean;
+	private Environment.State D = Environment.State.Dirty;
+	
+	private void assertEnvironment(Environment.State[][] state, Environment env){
+		for (int y = 0 ; y < state.length ; y ++){
+			for (int x = 0; x < state[y].length; x++){
+				String msg= "Cell ("+x+","+y+") Expected:<"+state[y][x]
+							+"> but was: <"+env.get(x, y)+">";
+				assertEquals(msg,state[y][x],env.get(x, y));
+			}
+			System.out.print("\n");
+		}
+	}
+	
 	@Test public void cleanCurrentPositionIfDirty(){
 		Environment env = new Environment(2,2);
 		MO mo = new MO();
@@ -16,25 +30,25 @@ public class _MOTest {
 		env.set(0,1,Environment.State.Dirty);
 
 		// TODO: This tests the environment
-		assertEquals(Environment.State.Clean,env.get(0,0)); 
-		assertEquals(Environment.State.Dirty,env.get(0,1)); 
-		assertEquals(Environment.State.Clean,env.get(1,0)); 
-		assertEquals(Environment.State.Dirty,env.get(1,1)); 
+		assertEnvironment(new Environment.State[][]{
+				{C,C},
+				{D,D}
+		},env);
 		
 		env.setPosition(mo,1,1);
 		mo.doIt();
-		assertEquals(Environment.State.Clean,env.get(0,0)); 
-		assertEquals(Environment.State.Dirty,env.get(0,1)); 
-		assertEquals(Environment.State.Clean,env.get(1,0)); 
-		assertEquals(Environment.State.Clean,env.get(1,1));
+		assertEnvironment(new Environment.State[][]{
+				{C,C},
+				{D,C}
+		},env);
 		assertEquals(new Point(1,1),env.getPosition(mo));
 		
 		env.setPosition(mo,0,1);
 		mo.doIt();
-		assertEquals(Environment.State.Clean,env.get(0,0)); 
-		assertEquals(Environment.State.Clean,env.get(0,1)); 
-		assertEquals(Environment.State.Clean,env.get(1,0)); 
-		assertEquals(Environment.State.Clean,env.get(1,1));
+		assertEnvironment(new Environment.State[][]{
+				{C,C},
+				{C,C}
+		},env);
 		assertEquals(new Point(0,1),env.getPosition(mo));
 	}
 	
