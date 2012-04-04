@@ -64,5 +64,12 @@ public class _MOTest {
 		mo.doIt();	assertEquals(new Point(2,2),env.getPosition(mo));
 	}
 	
-	
+	@Test public void stopsInTheLastCell(){
+		Environment env = new Environment(3,3);
+		MO mo = new MO();
+		env.addAgent(mo,2,2);
+		
+		assertEquals(new Point(2,2),env.getPosition(mo));
+		mo.doIt();	assertEquals(new Point(2,2),env.getPosition(mo));
+	}
 }

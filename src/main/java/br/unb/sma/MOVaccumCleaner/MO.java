@@ -27,10 +27,12 @@ public class MO extends Agent{
 			newPosition.x += direction.x; 
 			newPosition.y += direction.y; 
 			
-			if (direction.equals(RIGHT) && newPosition.x >= env.getCols()){
+			if (position.x == env.getCols()-1 && position.y == env.getRows()-1){
+				//No change
+			}else if (direction.equals(RIGHT) && position.x == env.getCols()-1){
 				env.setPosition(this, position.x, position.y+1);
 				direction = LEFT;
-			}else if (direction.equals(LEFT) && newPosition.x < 0){
+			}else if (direction.equals(LEFT) && position.x == 0){
 				env.setPosition(this, position.x, position.y+1);
 				direction = RIGHT;
 			}else
