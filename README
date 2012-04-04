@@ -6,7 +6,7 @@ To run use the params:
 	"-gui -agents mo:br.unb.sma.MOVaccumCleaner.MO;viewer:br.unb.sma.MOVaccumCleaner.spike.Viewer -local-host 127.0.0.1"
 
 * Vaccum Cleaner Robot:
-	- Name: MO (in alusion to the Microbe Obliterator of the Movie Wall-E).
+	- Name: MO (in allusion to the Microbe Obliterator of the Movie Wall-E).
 	- PAGE:
 		- Perceptions: 
 			- Environment is a bi-dimensional Grid with configurable size. 
@@ -32,6 +32,32 @@ To run use the params:
 			- Discrete: The possible states and actions are very well limited.
 			- Single Agent: Beside the "EVE" agent (the viewer), only MO takes 
 				action on the environment.
+
+* Dirty Maker Robot:
+	- Name: WALL-E (in allusion to the Waste Allocation Load Lifter - Earth 
+		Class of the Movie Wall-E).
+	- PAGE:
+		- Perceptions: 
+			- Environment is a bi-dimensional Grid with configurable size. 
+				So its 'location' is determined by the coordinates x,y
+		- Actions: The robot is able to perform the following actions:
+			- Move (right, left, up or Down): which advances him one position 
+				on each direction (when not on the edges).
+			- Mess : Which changes the state of the floor to 'Dirty'.
+		- Goals:
+			- Dirty if clean.
+			- Move to find more cells to mess with.
+		- Environment:
+			- Accessible: Since all information about the environment is directly 
+				and instantaneous provided to the agent.
+			- Deterministic: Since both actions have clear output results.
+				Eg: Moving changes the position and Messing changes the state.
+			- Episodic: The decision made regarding either to mess or not to
+				mess is random not taking into account any other info. 
+			- Dynamic: Since MO can clean the cells wich WALL-E messed with.
+			- Discrete: The possible states and actions are limited.
+			- Multiple Agent: Both WALL-E and MO can change the state of the 
+				environment.
 
 * Viewer:
 	- Name : Auto (in allusion to the Auto Pilot Central Computer

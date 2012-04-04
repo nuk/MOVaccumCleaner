@@ -1,13 +1,13 @@
 package br.unb.sma.MOVaccumCleaner;
 
 import static org.junit.Assert.assertEquals;
+import static br.unb.sma.MOVaccumCleaner.EnvironmentAssertions.*;
+
+import java.awt.Point;
 
 import org.junit.Test;
 
 public class _EnvironmentTest {
-
-	private Environment.State C = Environment.State.Clean;
-	private Environment.State D = Environment.State.Dirty;
 	
 	@Test public void everythingStartsClean(){
 		Environment env = new Environment(3,3);
@@ -33,6 +33,18 @@ public class _EnvironmentTest {
 		},env);
 	}
 	
+	@Test public void knowsWhereAnAgentIs(){
+		Environment env = new Environment(3,3);
+		
+		MO mo1 = new MO();
+		MO mo2 = new MO();
+		env.addAgent(mo1, 1, 1);
+		env.addAgent(mo2, 2, 2);
+		
+		assertEquals(new Point(1,1),env.agentPosition(mo1));
+		assertEquals(new Point(2,2),env.agentPosition(mo2));
+	}
+	
 	@Test public void printsTheRepresentation(){
 		Environment env = new Environment(3,3);
 		assertEquals(". . . \n. . . \n. . . \n",env.toString());
@@ -42,20 +54,12 @@ public class _EnvironmentTest {
 		env.set(2,2, Environment.State.Dirty);
 		assertEquals(". * . \n. . . \n* . * \n",env.toString());
 		
-		env.addAgent(new MO(), 1, 1);
+		MO mo = new MO();
+		env.addAgent(mo, 1, 1);
 		assertEquals(". * . \n. a . \n* . * \n",env.toString());
 		
-		env.agentPosition(1, 0);
+		env.agentPosition(mo,1, 0);
 		assertEquals(". â . \n. . . \n* . * \n",env.toString());
 	}
 	
-	private void assertEnvironment(Environment.State[][] state, Environment env){
-		for (int y = 0 ; y < state.length ; y ++){
-			for (int x = 0; x < state[y].length; x++){
-				String msg= "Cell ("+x+","+y+") Expected:<"+state[y][x]
-							+"> but was: <"+env.get(x, y)+">";
-				assertEquals(msg,state[y][x],env.get(x, y));
-			}
-		}
-	}
 }

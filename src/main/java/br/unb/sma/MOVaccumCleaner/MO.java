@@ -7,7 +7,7 @@ import java.awt.Point;
 
 import br.unb.sma.MOVaccumCleaner.Environment.State;
 
-public class MO extends Agent{
+public class MO extends EnvironmentAgent{
 	
 	private static final Point UP		= new Point(0,-1); 
 	private static final Point DOWN		= new Point(0,+1); 
@@ -17,12 +17,8 @@ public class MO extends Agent{
 	
 	private static final long serialVersionUID = -5831718355718486260L;
 	
-	private Environment env;
-	
 	private Point direction = RIGHT;
 	
-	public void setEnvironment(Environment env) {	this.env = env;	}
-
 	@Override //TODO: Check how to test this
 	protected void setup() {
 		Environment.getInstance().addAgent(this, 0, 0);
@@ -32,7 +28,7 @@ public class MO extends Agent{
 	}
 	
 	public void doIt() {
-		Point here = env.agentPosition();
+		Point here = env.agentPosition(this);
 		Point to = this.direction;
 		if (env.get(here.x, here.y) == State.Clean){
 			
@@ -62,7 +58,7 @@ public class MO extends Agent{
 	private void move(Point position, Point direction) {
 		position.x += direction.x; 
 		position.y += direction.y; 
-		env.agentPosition( position.x, position.y);
+		env.agentPosition(this, position.x, position.y);
 	}
 
 }

@@ -1,6 +1,10 @@
 package br.unb.sma.MOVaccumCleaner;
 
+import jade.core.Agent;
+
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Environment {
@@ -9,7 +13,7 @@ public class Environment {
 
 	private State[][] state; 
 	
-	private Point position;
+	private Map<EnvironmentAgent, Point> position;
 
 	//TODO: Check if needs to be injected or go to a real factory
 	private static Environment instance;
@@ -27,6 +31,7 @@ public class Environment {
 	
 	public Environment(int cols, int rows) {
 		state = new State[rows][cols];
+		position = new HashMap<EnvironmentAgent, Point>();
 		for (int i =0 ; i < rows; i ++){
 			for(int j = 0 ; j < cols; j++){
 				state[i][j] = State.Clean;
@@ -38,30 +43,34 @@ public class Environment {
 
 	public State get(int col, int row) {	return state[row][col];	}
 
-	public void addAgent(MO mo, int col, int row) {
-		mo.setEnvironment(this);
-		Point p = position;//.get(mo); 
+	public void addAgent(EnvironmentAgent a, int col, int row) {
+		a.setEnvironment(this);
+		Point p = position.get(a); 
 		if (p == null)	{
 			p = new Point(col, row);
-			position = p;
+			position.put(a,p);
 		}
 		else p.setLocation(col, row);
 	}
 
-	public void agentPosition(int x, int y) {	position.setLocation(x, y);	}
+	public void agentPosition(Agent a, int x, int y) {	position.get(a).setLocation(x, y);	}
 
-	public Point agentPosition() {
-		return position;//FIXME: This should be unmodifiable
+	public Point agentPosition(Agent a) {
+		return position.get(a);//FIXME: This should be unmodifiable
 	}
 
 	public int getRows(){	return state.length;	}
 	public int getCols(){	return state[0].length;	}
 	
+	private boolean hasAgent(int x, int y){
+		return position.containsValue(new Point(x, y));
+	}
+	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
 		for (int y = 0 ; y < getRows() ; y ++){
 			for (int x = 0; x < getCols(); x++){
-				if(new Point(x,y).equals(agentPosition())){
+				if(hasAgent(x,y)){
 					if (get(x,y) == State.Dirty)
 						b.append('â');
 					else
