@@ -3,6 +3,7 @@ This Project consists of a Single Agent representing a Vaccum Cleaner Robot
 	to what is happening.
 
 To run use the params use the class br.unb.sma.MOVaccumCleaner.spike.SpikeLaucher.
+TO package use 'mvn assembly:single'
 
 * Vaccum Cleaner Robot:
 	- Name: MO (in allusion to the Microbe Obliterator of the Movie Wall-E).
