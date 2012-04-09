@@ -10,16 +10,16 @@ import org.junit.Test;
 
 public class _WallETest {
 
-	@Test public void messWithACellWhenAdequate(){
+	@Test public void messWithACellWith10PercentChance(){
 		Environment env = new Environment(3, 3);
-		final boolean[] mess = new boolean[]{true};
+		final double[] mess = new double[]{0};
 		WallE walle = new WallE(){
-			protected boolean shouldMess(){	return mess[0];	} //FIXME: SHould Mock the ramdonm
+			protected double random(){	return mess[0];	}
 		};
 		env.addAgent(walle,0,0);
 		
 		env.agentPosition(walle, 1,1);
-		mess[0] = true; walle.doIt();
+		mess[0] = 0.91; walle.doIt();
 		assertEnvironment(new State[][]{
 				{C,C,C},
 				{C,D,C},
@@ -28,7 +28,7 @@ public class _WallETest {
 		assertEquals(new Point(1,1),env.agentPosition(walle));
 		
 		env.agentPosition(walle, 0,2);
-		mess[0] = false; walle.doIt();
+		mess[0] = 0.89; walle.doIt();
 		assertEnvironment(new State[][]{
 				{C,C,C},
 				{C,D,C},
@@ -36,7 +36,7 @@ public class _WallETest {
 		},env);
 		
 		env.agentPosition(walle, 1,2);
-		mess[0] = true; walle.doIt();
+		mess[0] = 0.99; walle.doIt();
 		assertEnvironment(new State[][]{
 				{C,C,C},
 				{C,D,C},
@@ -48,7 +48,7 @@ public class _WallETest {
 	@Test public void whenMessStayAtTheSameSpot(){
 		Environment env = new Environment(3, 3);
 		WallE walle = new WallE(){
-			protected boolean shouldMess(){	return true;	}
+			protected double random(){	return 1;	} 
 		};
 		env.addAgent(walle,0,0);
 		
@@ -62,29 +62,48 @@ public class _WallETest {
 		assertEquals(new Point(1,1),env.agentPosition(walle));
 	}
 	
-	@Test public void whenDontMessMoveRandomly(){
+	@Test public void whenDontMessMoveRandomlyWith25PercentChanceForEachDirection(){
 		Environment env = new Environment(3, 3);
+		final double[] mess = new double[]{0};
 		WallE walle = new WallE(){
-			protected boolean shouldMess(){	return false;	}
-			protected Point direction(){ return new Point(1,0);}
+			protected double random(){	return mess[0];	} 
 		};
 		env.addAgent(walle,0,0);
 		
 		env.agentPosition(walle, 1,1);
-		walle.doIt();
+		mess[0] = 0.76;	walle.doIt();
 		assertEnvironment(new State[][]{
 				{C,C,C},
 				{C,C,C},
 				{C,C,C},
-		},env);
-		assertEquals(new Point(2,1),env.agentPosition(walle));
+		},env);	assertEquals(new Point(2,1),env.agentPosition(walle));
+		
+		mess[0] = 0.1;	walle.doIt();
+		assertEnvironment(new State[][]{
+				{C,C,C},
+				{C,C,C},
+				{C,C,C},
+		},env);	assertEquals(new Point(2,0),env.agentPosition(walle));
+		
+		mess[0] = 0.65;	walle.doIt();
+		assertEnvironment(new State[][]{
+				{C,C,C},
+				{C,C,C},
+				{C,C,C},
+		},env);	assertEquals(new Point(1,0),env.agentPosition(walle));
+		
+		mess[0] = 0.26;	walle.doIt();
+		assertEnvironment(new State[][]{
+				{C,C,C},
+				{C,C,C},
+				{C,C,C},
+		},env);	assertEquals(new Point(1,1),env.agentPosition(walle));
 	}
 	
 	@Test public void doesNotCrashDuringMovementNearBorder(){
 		Environment env = new Environment(3, 3);
 		WallE walle = new WallE(){
-			protected boolean shouldMess(){	return false;	}
-			protected Point direction(){ return new Point(1,1);}
+			protected double random(){	return 0.9;	} 
 		};
 		env.addAgent(walle,0,0);
 		

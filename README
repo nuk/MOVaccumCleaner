@@ -2,8 +2,7 @@ This Project consists of a Single Agent representing a Vaccum Cleaner Robot
 	in a grid environment. There's a second agent but it only act as a View
 	to what is happening.
 
-To run use the params: 
-	"-gui -agents mo:br.unb.sma.MOVaccumCleaner.MO;walle:br.unb.sma.MOVaccumCleaner.WallE;viewer:br.unb.sma.MOVaccumCleaner.spike.Viewer -local-host 127.0.0.1"
+To run use the params use the class br.unb.sma.MOVaccumCleaner.spike.SpikeLaucher.
 
 * Vaccum Cleaner Robot:
 	- Name: MO (in allusion to the Microbe Obliterator of the Movie Wall-E).

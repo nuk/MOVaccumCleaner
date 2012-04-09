@@ -17,8 +17,8 @@ public class WallE extends EnvironmentAgent {
 	}
 
 	//Moves randomly
-	protected Point direction() {
-		switch ((int)(Math.random()*4)) {
+	private Point direction() {
+		switch ((int)(random()*4)) {
 			case 0: return UP;
 			case 1: return DOWN;
 			case 2: return LEFT;
@@ -27,8 +27,12 @@ public class WallE extends EnvironmentAgent {
 		return null;
 	}
 
-	protected boolean shouldMess() {
-		return Math.random()*100 > 90; // 10% chance of messing around
+	protected double random(){
+		return Math.random();
+	}
+	
+	private boolean shouldMess() {
+		return random()*100 > 90; // 10% chance of messing around
 	}
 
 }
