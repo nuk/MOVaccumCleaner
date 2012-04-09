@@ -3,6 +3,8 @@ package br.unb.sma.MOVaccumCleaner;
 import static org.junit.Assert.*;
 import static br.unb.sma.MOVaccumCleaner.EnvironmentAssertions.*;
 
+import jade.core.Agent;
+
 import java.awt.Point;
 
 import org.junit.Test;
@@ -59,12 +61,45 @@ public class _MOTest {
 		mo.doIt();	assertEquals(new Point(2,2),env.agentPosition(mo));
 	}
 	
-	@Test public void stopsInTheLastCell(){
+	@Test public void goesBackWhenInTheLastCell(){
 		Environment env = new Environment(3,3);
 		MO mo = new MO();
 		env.addAgent(mo,2,2);
 		
 		assertEquals(new Point(2,2),env.agentPosition(mo));
-		mo.doIt();	assertEquals(new Point(2,2),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(1,2),env.agentPosition(mo));
+	}
+	
+	@Test public void whenGoingBackGoesAllTheWayScanningThenGoesAgain(){
+		Environment env = new Environment(3,3);
+		MO mo = new MO();
+		env.addAgent(mo,2,2);
+		
+		mo.doIt();	assertEquals(new Point(1,2),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(0,2),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(0,1),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(1,1),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(2,1),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(2,0),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(1,0),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(0,0),env.agentPosition(mo));
+		mo.doIt();	assertEquals(new Point(1,0),env.agentPosition(mo));
+	}
+	
+	@Test public void doNothingIfNothingIsSensed(){
+		Environment env = new Environment(3,3);
+		MO mo = new MO();
+		
+		assertEquals(null,env.agentPosition(mo));
+		mo.doIt();	assertEquals(null,env.agentPosition(mo));
+		
+		env = new Environment(3,3){
+			public Point agentPosition(Agent a) {	return null;	}
+		};
+		mo = new MO();
+		env.addAgent(mo,2,2);
+		
+		assertEquals(null,env.agentPosition(mo));
+		mo.doIt();	assertEquals(null,env.agentPosition(mo));
 	}
 }

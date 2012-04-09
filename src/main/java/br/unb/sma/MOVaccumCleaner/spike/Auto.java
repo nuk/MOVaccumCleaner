@@ -10,7 +10,7 @@ public class Auto extends Agent {
 	private Environment env;
 	
 	protected void setup() {
-		env = Environment.getInstance();
+		env = Environment.instance();
 		addBehaviour(new TickerBehaviour(this, 200) {
 			@Override protected void onTick() {	
 				System.out.println("-----------------------------");

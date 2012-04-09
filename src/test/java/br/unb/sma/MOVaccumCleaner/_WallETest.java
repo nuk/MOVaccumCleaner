@@ -14,7 +14,7 @@ public class _WallETest {
 		Environment env = new Environment(3, 3);
 		final boolean[] mess = new boolean[]{true};
 		WallE walle = new WallE(){
-			protected boolean shouldMess(){	return mess[0];	}
+			protected boolean shouldMess(){	return mess[0];	} //FIXME: SHould Mock the ramdonm
 		};
 		env.addAgent(walle,0,0);
 		

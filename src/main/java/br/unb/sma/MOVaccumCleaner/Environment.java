@@ -15,19 +15,9 @@ public class Environment {
 	
 	private Map<EnvironmentAgent, Point> position;
 
-	//TODO: Check if needs to be injected or go to a real factory
-	private static Environment instance;
-	public static Environment getInstance(){
-		if (instance == null) {
-			instance = new Environment(10,5);
-			for (int i =0 ; i < 5; i ++){
-				for(int j = 0 ; j < 10; j++){
-					if (Math.random()*100 > 90) instance.set(j, i, State.Dirty);
-				}
-			}
-		}
-		return instance;
-	}
+	protected static Environment instance;
+	public static Environment instance(){	return instance;	}
+	public static Environment instance(Environment e){	return instance=e;	}
 	
 	public Environment(int cols, int rows) {
 		state = new State[rows][cols];
