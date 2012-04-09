@@ -23,14 +23,12 @@ To run use the params use the class br.unb.sma.MOVaccumCleaner.spike.SpikeLauche
 				and instantaneous provided to the agent.
 			- Deterministic: Since both actions have clear output results.
 				Eg: Moving changes the position and Cleaning changes the state.
-			- Non-Episodic: The decision made regarding either to clean or not to
-				clean would be episodic. But the agent consider that every cell
-				that was visited in the past is already clean. That's why the 
-				agent never go back. 
+			- Episodic: The decision of where to go is based on which direction
+				has been taken and if a corner has been reached. 
 			- Static: Since no other agent takes action on the Environment.
-			- Discrete: The possible states and actions are very well limited.
-			- Single Agent: Beside the "EVE" agent (the viewer), only MO takes 
-				action on the environment.
+			- Discrete: The possible states and actions are limited.
+			- Multiple Agent: Both MO and WALL-E can change the state of the 
+				environment.
 
 * Dirty Maker Robot:
 	- Name: WALL-E (in allusion to the Waste Allocation Load Lifter - Earth 
