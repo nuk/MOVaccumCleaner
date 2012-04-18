@@ -1,12 +1,17 @@
-This Project consists of a Single Agent representing a Vaccum Cleaner Robot 
-	in a grid environment. There's a second agent but it only act as a View
-	to what is happening.
+This Project consists of a Multi Agent Environment representing a room
+	where you have a Vaccum Cleaner Robot (MO) and a Dirty Generator Robot 
+	(Wall-E). This room is represented as a configurablle grid. There's also
+	another agent (Auto) that acts only as a Viewer to what is happening.
+	All the names of the agents were based on the characters of the movie
+	Wall-E from Pixar (All Rights Reserved).
 
-To run use the params use the class br.unb.sma.MOVaccumCleaner.spike.SpikeLaucher.
-TO package use 'mvn assembly:single'
+In order to execute a prepared simulation you can used the class 
+	br.unb.sma.MOVaccumCleaner.spike.SpikeLaucher.
+In order package the application 'mvn assembly:single'
 
 * Vaccum Cleaner Robot:
 	- Name: MO (in allusion to the Microbe Obliterator of the Movie Wall-E).
+	- Class: br.unb.sma.MOVaccumCleaner.MO
 	- PAGE:
 		- Perceptions: 
 			- Environment is a bi-dimensional Grid with configurable size. 
@@ -15,25 +20,28 @@ TO package use 'mvn assembly:single'
 		- Actions: The robot is able to perform the following actions:
 			- Move (right, left, up or Down): which advances him one position 
 				on each direction (when not on the edges).
-			- Clean : Which changes the state of the floor to 'Clean'.
+			- Clean: Which changes the state of the floor to 'Clean'.
+			- Sense: Which tells him if the current cell is 'Dirty' or 'Clean'.
 		- Goals:
-			- Clean if dirty.
-			- Move to find more dirt.
+			- Clean where is 'Dirty'.
+			- Move to find more 'Dirty' cells.
 		- Environment:
-			- Accessible: Since all information about the environment is directly 
-				and instantaneous provided to the agent.
+			- Accessible: Since all information about the environment is 
+				directly and instantaneously provided to the agent.
 			- Deterministic: Since both actions have clear output results.
 				Eg: Moving changes the position and Cleaning changes the state.
-			- Episodic: The decision of where to go is based on which direction
-				has been taken and if a corner has been reached. 
-			- Static: Since no other agent takes action on the Environment.
+			- Non-Episodic: The decision of where to go is based on which 
+				direction has been taken and if a corner has been reached. 
+			- Dynamic: Since WALL-E keeps changing some cells to 'Dirty' at
+				random.
 			- Discrete: The possible states and actions are limited.
 			- Multiple Agent: Both MO and WALL-E can change the state of the 
 				environment.
 
-* Dirty Maker Robot:
+* Dirty Generator Robot:
 	- Name: WALL-E (in allusion to the Waste Allocation Load Lifter - Earth 
 		Class of the Movie Wall-E).
+	- Class: br.unb.sma.MOVaccumCleaner.WallE
 	- PAGE:
 		- Perceptions: 
 			- Environment is a bi-dimensional Grid with configurable size. 
@@ -41,16 +49,16 @@ TO package use 'mvn assembly:single'
 		- Actions: The robot is able to perform the following actions:
 			- Move (right, left, up or Down): which advances him one position 
 				on each direction (when not on the edges).
-			- Mess : Which changes the state of the floor to 'Dirty'.
+			- Mess: Which changes the state of the floor to 'Dirty'.
 		- Goals:
-			- Dirty if clean.
-			- Move to find more cells to mess with.
+			- Turn a 'Clean' cell 'Dirty' (with random chances).
+			- Move to find more cells to mess with ('Clean' ones).
 		- Environment:
-			- Accessible: Since all information about the environment is directly 
-				and instantaneous provided to the agent.
+			- Accessible: Since all information about the environment is 
+				directly and instantaneously provided to the agent.
 			- Deterministic: Since both actions have clear output results.
 				Eg: Moving changes the position and Messing changes the state.
-			- Episodic: The decision made regarding either to mess or not to
+			- Non-Episodic: The decision made regarding either to mess or not to
 				mess is random not taking into account any other info. 
 			- Dynamic: Since MO can clean the cells wich WALL-E messed with.
 			- Discrete: The possible states and actions are limited.
@@ -60,13 +68,20 @@ TO package use 'mvn assembly:single'
 * Viewer:
 	- Name : Auto (in allusion to the Auto Pilot Central Computer
 		 of the Movie Wall-E).
+	- Class: br.unb.sma.MOVaccumCleaner.spike.Auto
 	- PAGE:
 		- Perceptions: 
 			- Environment is a bi-dimensional Grid with configurable size. 
 			- Each cell of the grid can be 'Dirty' or 'Clean'.
-			- Each cell can have a MO or Not.
+			- Each cell can have a MO, a WALL-E or None.
 		- Actions: The robot is able to perform the following actions:
 			- Show: Shows a representation of the environment.
+				- For 'Empty-Clean' cells its ' '
+				- For 'Empty-Dirty' cells its '*'
+				- For 'MO-Clean' cells its 'o'
+				- For 'MO-Dirty' cells its 'ô'
+				- For 'WALLE-Clean' cells its 'w'
+				- For 'WALLE-Dirty' cells its 'ŵ'
 	- Goals:
 		- Observe and provide a representation of the environment.
 	- Environment:
@@ -77,4 +92,5 @@ TO package use 'mvn assembly:single'
 		- Dynamic: Since Auto can't change the state of the environment, from
 			its point of view, the environment is changed against its will.
 		- Discrete: The possible states and actions are very well limited.
-		- Single Agent: Only MO takes action on the environment.
+		- Multiple Agent: Both WALL-E and MO can change the state of the 
+			environment.
